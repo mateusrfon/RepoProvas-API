@@ -13,15 +13,6 @@ export default class Exam {
     name: string;
 
     @Column()
-    category_id: number; //foreign key
-
-    @Column()
-    subject_id: number; //foreign key
-
-    @Column()
-    professor_id: number; //foreign key
-
-    @Column()
     link: string;
 
     @ManyToOne(() => ExamCategory, (exam_categories) => exam_categories.exam)
