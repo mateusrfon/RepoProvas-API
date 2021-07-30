@@ -6,7 +6,7 @@ export default class Term {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ unique: true })
     name: string;
 
     @OneToMany(() => Subject, subjects => subjects.term)

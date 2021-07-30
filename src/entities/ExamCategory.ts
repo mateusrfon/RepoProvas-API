@@ -6,7 +6,7 @@ export default class ExamCategory {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ unique: true })
     name: string;
 
     @OneToMany(() => Exam, exams => exams.category)
