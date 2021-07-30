@@ -1,0 +1,2 @@
+await queryRunner.query(`INSERT INTO exam_categories (name) VALUES ('P1'), ('P2'), ('P3'), ('2ch'), ('Outras')`);
+await queryRunner.query(`INSERT INTO professors (name) VALUES ('Mateus Fonseca'), ('Pedro Gomes'), ('Ana Carla'), ('Devi Ribeiro')`);
