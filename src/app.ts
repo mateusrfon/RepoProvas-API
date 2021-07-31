@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import "reflect-metadata";
+import "./populateDatabase";
 
 import connectDatabase from "./database";
 
