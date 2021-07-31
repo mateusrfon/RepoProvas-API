@@ -25,3 +25,20 @@ describe("GET /professors", () => {
         expect(result.status).toBe(200);
     });
 });
+
+describe("GET /professor/:id", () => {
+    it("should return status 400 for NaN id", async () => {
+        const result = await supertest(app).get("/professor/a");
+        expect(result.status).toEqual(400);
+    });
+    it("should return status 404 for inexistent id", async () => {
+        const result = await supertest(app).get("/professor/-1");
+        expect(result.status).toEqual(404);
+    });
+    it("should return a professor object for valid id", async () => {
+        const professor = await getRepository(Professor).findOne({ relations: ['exams'] });
+        const id = professor.id;
+        const result = await supertest(app).get(`/professor/${id}`);
+        expect(result.body).toEqual(professor);
+    });
+});

@@ -8,3 +8,11 @@ export async function findAll() {
         console.error(error);
     }    
 }
+
+export async function findById(id: number) {
+    try {
+        return await getRepository(Professor).findOne({ relations: ['exams'], where: { id } });
+    } catch(error) {
+        console.error(error);
+    }   
+}
