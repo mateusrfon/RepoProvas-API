@@ -12,7 +12,7 @@ export default class Subject {
     name: string;
 
     @OneToMany(() => Exam, exams => exams.subject)
-    exam: Exam[];
+    exams: Exam[];
 
     @ManyToOne(() => Term, terms => terms.subject)
     term: Term;

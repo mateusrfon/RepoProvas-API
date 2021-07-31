@@ -15,12 +15,12 @@ export default class Exam {
     @Column()
     link: string;
 
-    @ManyToOne(() => ExamCategory, (exam_categories) => exam_categories.exam)
+    @ManyToOne(() => ExamCategory, (exam_categories) => exam_categories.exams)
     category: ExamCategory;
 
-    @ManyToOne(() => Subject, (subjects) => subjects.exam)
+    @ManyToOne(() => Subject, (subjects) => subjects.exams)
     subject: Subject;
 
-    @ManyToOne(() => Professor, (professors) => professors.exam)
+    @ManyToOne(() => Professor, (professors) => professors.exams)
     professor: Professor;
 }
