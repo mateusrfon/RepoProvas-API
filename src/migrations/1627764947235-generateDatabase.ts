@@ -1,7 +1,7 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class createDatabase1627686501034 implements MigrationInterface {
-    name = 'createDatabase1627686501034'
+export class generateDatabase1627764947235 implements MigrationInterface {
+    name = 'generateDatabase1627764947235'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE "exam_categories" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, CONSTRAINT "UQ_6e13421069d2ac913c806a19884" UNIQUE ("name"), CONSTRAINT "PK_6b4d996a1ce1e4809b7696ce068" PRIMARY KEY ("id"))`);
@@ -18,9 +18,43 @@ export class createDatabase1627686501034 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "exams" ADD CONSTRAINT "FK_bcfdfcbfb5fe82b98eb79ac5818" FOREIGN KEY ("professorId") REFERENCES "professors"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE "subjects_professors_professors" ADD CONSTRAINT "FK_e34e39105e2fb3d152831bd1742" FOREIGN KEY ("subjectsId") REFERENCES "subjects"("id") ON DELETE CASCADE ON UPDATE CASCADE`);
         await queryRunner.query(`ALTER TABLE "subjects_professors_professors" ADD CONSTRAINT "FK_a951cc9c4c6c77d1c7de8ae8836" FOREIGN KEY ("professorsId") REFERENCES "professors"("id") ON DELETE CASCADE ON UPDATE CASCADE`);
-        //
+        //create exam_categories and terms
         await queryRunner.query(`INSERT INTO exam_categories (name) VALUES ('P1'), ('P2'), ('P3'), ('2ch'), ('Outras')`);
         await queryRunner.query(`INSERT INTO terms (name) VALUES ('1'), ('2'), ('3'), ('4'), ('5'), ('6'), ('7'), ('8')`);
+
+        //create professors and subjects
+        await queryRunner.query(`
+            INSERT INTO professors (name) VALUES 
+            ('Mateus Fonseca'), 
+            ('Pedro Gomes'), 
+            ('Ana Carla'), 
+            ('Devi Ribeiro')
+        `);
+        const terms = await queryRunner.query(`
+            SELECT * FROM terms
+        `);
+        await queryRunner.query(`
+            INSERT INTO subjects (name, "termId") VALUES 
+            ('Cálculo A', ${terms[0].id}), 
+            ('Cálculo B', ${terms[1].id}), 
+            ('Cálculo C', ${terms[2].id}), 
+            ('Cálculo D', ${terms[3].id})
+        `);
+
+        //link professors to subjects
+        const professors = await queryRunner.query(`
+            SELECT * FROM professors
+        `);
+        const subjects = await queryRunner.query(`
+            SELECT * FROM subjects
+        `);
+        await queryRunner.query(`
+            INSERT INTO "subjects_professors_professors" ("subjectsId", "professorsId") VALUES 
+            (${subjects[0].id}, ${professors[0].id}), 
+            (${subjects[1].id}, ${professors[1].id}), 
+            (${subjects[2].id}, ${professors[2].id}), 
+            (${subjects[3].id}, ${professors[3].id})
+        `);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
