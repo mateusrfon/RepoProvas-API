@@ -12,7 +12,7 @@ module.exports = {
   },
   extra: {
     ssl: {
-      rejectUnauthorized: false,
+      rejectUnauthorized: false
     }
   }
 };
