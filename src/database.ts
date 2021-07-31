@@ -1,7 +1,7 @@
 import { getConnectionManager } from "typeorm";
 
 export default async function connect() {
-    const connectionManager = await getConnectionManager();
+    const connectionManager = getConnectionManager();
     
     const connection = connectionManager.create({
         name: "default",
