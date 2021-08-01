@@ -7,9 +7,6 @@ beforeAll(async () => {
     await init();
 });
 
-beforeEach(async () => {
-});
-
 afterAll(async () => {
     await getConnection().close();
 });

@@ -3,7 +3,7 @@ import Professor from "../entities/Professor";
 
 export async function findAll() {
     try {
-        return await getRepository(Professor).find({ relations: ['exams'] });
+        return await getRepository(Professor).find({ relations: ['exams'], order: { id: "ASC" } });
     } catch(error) {
         console.error(error);
     }    
