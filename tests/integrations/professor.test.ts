@@ -33,7 +33,7 @@ describe("GET /professor/:id", () => {
         expect(result.status).toEqual(404);
     });
     it("should return a professor object for valid id", async () => {
-        const professor = await getRepository(Professor).findOne({ relations: ['exams'] });
+        const professor = await getRepository(Professor).findOne({ relations: ['exams', 'exams.category', 'exams.subject'] });
         const id = professor.id;
         const result = await supertest(app).get(`/professor/${id}`);
         expect(result.body).toEqual(professor);

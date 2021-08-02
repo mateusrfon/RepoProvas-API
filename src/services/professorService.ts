@@ -11,7 +11,7 @@ export async function findAll() {
 
 export async function findById(id: number) {
     try {
-        return await getRepository(Professor).findOne({ relations: ['exams'], where: { id } });
+        return await getRepository(Professor).findOne({ relations: ['exams', 'exams.category', 'exams.subject'], where: { id } });
     } catch(error) {
         console.error(error);
     }   
