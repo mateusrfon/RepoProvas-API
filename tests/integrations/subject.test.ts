@@ -35,7 +35,7 @@ describe("GET /subject/:id", () => {
         expect(result.status).toEqual(404);
     });
     it("should return a subject object for valid id", async () => {
-        const subject = await getRepository(Subject).findOne({ relations: ['exams'] });
+        const subject = await getRepository(Subject).findOne({ relations: ['exams', 'exams.category', 'exams.professor'] });
         const id = subject.id;
         const result = await supertest(app).get(`/subject/${id}`);
         expect(result.body).toEqual(subject);
