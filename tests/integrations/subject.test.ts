@@ -19,6 +19,7 @@ describe("GET /subjects", () => {
         subjectType.name = expect.any(String);
         subjectType.exams = expect.any(Array);
         subjectType.term = expect.any(Object);
+        subjectType.professors = expect.any(Object);
         expect(result.body).toEqual(expect.arrayContaining([expect.objectContaining(subjectType)]));
         expect(result.status).toBe(200);
     });

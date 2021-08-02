@@ -3,7 +3,7 @@ import Subject from "../entities/Subject";
 
 export async function findAll() {
     try {
-        return await getRepository(Subject).find({ relations: ['exams', 'term'], order: { id: "ASC" } });
+        return await getRepository(Subject).find({ relations: ['exams', 'term', 'professors'], order: { id: "ASC" } });
     } catch(error) {
         console.error(error);
     }    
