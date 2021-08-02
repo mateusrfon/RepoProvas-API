@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Exam from "../entities/Exam";
 
-import * as examService from "../services/sendService";
+import * as examService from "../services/examService";
 
 export async function postExam(req: Request, res: Response) {
     try {

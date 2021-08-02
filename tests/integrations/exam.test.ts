@@ -18,7 +18,7 @@ afterAll(async () => {
     await getConnection().close();
 })
 
-describe("POST /send", () => {
+describe("POST /exam", () => {
     it("should return status 400 for missing params", async () => {
         const body = {
             "name": "string",
@@ -27,7 +27,7 @@ describe("POST /send", () => {
             "subject": { "id": 17 },
             "professor": { "id": 29 }
         }
-        const result = await supertest(app).post("/send").send(body);
+        const result = await supertest(app).post("/exam").send(body);
         expect(result.status).toBe(400);
     });
     it("should return status 200 for valid exam", async () => {
@@ -40,7 +40,7 @@ describe("POST /send", () => {
             "subject": { "id": subjects[0].id },
             "professor": { "id": subjects[0].professors[0].id }
         }
-        const result = await supertest(app).post("/send").send(body);
+        const result = await supertest(app).post("/exam").send(body);
         expect(result.status).toBe(200);
     });
 });
